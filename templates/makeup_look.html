@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<header>
+    <h2><a href="#" class="logo">Beauty Mirrors</a></h2>
+    <div class="navigation">
+      <a href="/">Home</a>
+      <a href="#">About</a>
+      <a href="#">Info</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+    </div>
+  </header>
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+        {% for i in range(5) %}
+            <!-- <img class ='m-3' src="" style="width: 150px;" class="rounded float-left"> -->
+            <div class="card m-3" style="width: 18rem;">
+                <img class="card-img-top" style='border-width:0cm' src="/static/makeup/{{i+1}}.jpeg" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{look_name[i]}}</h5>
+                  <a href="/transfer/{{source_file}}/{{i+1}}" class="btn btn-primary">Apply Look</a>
+                </div>
+              </div>
+        {% endfor %}
+    </div>
+    <div class="row d-flex justify-content-center">
+        {% for i in range(5,10) %}
+            <div class="card m-3" style="width: 18rem;">
+                <img class="card-img-top" src="/static/makeup/{{i+1}}.jpeg" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{look_name[i]}}</h5>
+                  <a href="/transfer/{{source_file}}/{{i+1}}" class="btn btn-primary">Apply Look</a>
+                </div>
+              </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

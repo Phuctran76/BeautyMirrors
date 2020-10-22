@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+{% block content %}
+
+<header>
+    <h2><a href="#" class="logo">Beauty Mirrors</a></h2>
+    <div class="navigation">
+        <a href="/">Home</a>
+        <a href="#">About</a>
+        <a href="#">Info</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </div>
+    <link rel="stylesheet" href="/static/home.css">
+</header>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <img class="card-img-top" style='width: 400px;' src="/static/makeup/{{look}}" alt="Card image cap">
+        </div>
+        <div class="col source">
+            <img class="card-img-top" style='width: 400px;' src="/{{filename}}" alt="Card image cap">
+            <div class="overlay">
+                <img class="card-img-top" style='width: 400px;' src="/{{source_path}}" alt="Card image cap">
+            </div>
+        </div>
+    </div>
+</div>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+	<div class="row">
+		<div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel"  data-interval="1000">
+            <div class="MultiCarousel-inner">
+                {% for i in range(7)%}
+                <div class="item" >
+                    <div class="pad15">
+                        <a href="{{item_list['LINK'][i]}}">
+                        <img src="/static/products/{{look.split('.')[0]}}/{{i+1}}.jpeg" alt="">
+                    </a>
+                        <p class="lead" style="min-height: 70px;">{{item_list['PRODUCT'][i]}}</p>
+                        <p style="min-height: 40px;">{{item_list['TYPE'][i]}}</p>
+                        <p>{{item_list['PRICE'][i]}}</p>
+                    </div>
+                </div>
+                {% endfor%}
+                <!-- <div class="item">
+                    <div class="pad15">
+                        <a href="https://mdbootstrap.com/snippets/jquery/temp/2617569?action=prism_export#html-tab-view">
+                            <img src="/static/products/{{look.split('.')[0]}}/2.jpeg" alt="">
+                        </a>                        
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="pad15">
+                        <a href="https://mdbootstrap.com/snippets/jquery/temp/2617569?action=prism_export#html-tab-view">
+                            <img src="/static/products/{{look.split('.')[0]}}/3.jpeg" alt="">
+                        </a>                       
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="pad15">
+                        <a href="https://mdbootstrap.com/snippets/jquery/temp/2617569?action=prism_export#html-tab-view">
+                            <img src="/static/products/{{look.split('.')[0]}}/4.jpeg" alt="">
+                        </a>                        
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="pad15">
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="pad15">
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="pad15">
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div> -->
+               
+            </div>
+            <button class="btn btn-primary leftLst"><</button>
+            <button class="btn btn-primary rightLst">></button>
+        </div>
+	</div>
+	<div class="row">
+	    <div class="col-md-12 text-center">
+	        <br/><br/><br/>
+	        <hr/>
+	        <p>Settings</p>
+	        <p>Change data items for xs,sm,md and lg display items respectively. Ex:data-items="1,3,5,6"</p>
+	        <p>Change data slide for slides per click Ex:data-slide="1"</p>
+	    </div>
+	</div>
+</div>
+
+<script>
+    $(document).ready(function () {
+    var itemsMainDiv = ('.MultiCarousel');
+    var itemsDiv = ('.MultiCarousel-inner');
+    var itemWidth = "";
+
+    $('.leftLst, .rightLst').click(function () {
+        var condition = $(this).hasClass("leftLst");
+        if (condition)
+            click(0, this);
+        else
+            click(1, this)
+    });
+
+    ResCarouselSize();
+
+
+
+
+    $(window).resize(function () {
+        ResCarouselSize();
+    });
+
+    //this function define the size of the items
+    function ResCarouselSize() {
+        var incno = 0;
+        var dataItems = ("data-items");
+        var itemClass = ('.item');
+        var id = 0;
+        var btnParentSb = '';
+        var itemsSplit = '';
+        var sampwidth = $(itemsMainDiv).width();
+        var bodyWidth = $('body').width();
+        $(itemsDiv).each(function () {
+            id = id + 1;
+            var itemNumbers = $(this).find(itemClass).length;
+            btnParentSb = $(this).parent().attr(dataItems);
+            itemsSplit = btnParentSb.split(',');
+            $(this).parent().attr("id", "MultiCarousel" + id);
+
+
+            if (bodyWidth >= 1200) {
+                incno = itemsSplit[3];
+                itemWidth = sampwidth / incno;
+            }
+            else if (bodyWidth >= 992) {
+                incno = itemsSplit[2];
+                itemWidth = sampwidth / incno;
+            }
+            else if (bodyWidth >= 768) {
+                incno = itemsSplit[1];
+                itemWidth = sampwidth / incno;
+            }
+            else {
+                incno = itemsSplit[0];
+                itemWidth = sampwidth / incno;
+            }
+            $(this).css({ 'transform': 'translateX(0px)', 'width': itemWidth * itemNumbers });
+            $(this).find(itemClass).each(function () {
+                $(this).outerWidth(itemWidth);
+            });
+
+            $(".leftLst").addClass("over");
+            $(".rightLst").removeClass("over");
+
+        });
+    }
+
+
+    //this function used to move the items
+    function ResCarousel(e, el, s) {
+        var leftBtn = ('.leftLst');
+        var rightBtn = ('.rightLst');
+        var translateXval = '';
+        var divStyle = $(el + ' ' + itemsDiv).css('transform');
+        var values = divStyle.match(/-?[\d\.]+/g);
+        var xds = Math.abs(values[4]);
+        if (e == 0) {
+            translateXval = parseInt(xds) - parseInt(itemWidth * s);
+            $(el + ' ' + rightBtn).removeClass("over");
+
+            if (translateXval <= itemWidth / 2) {
+                translateXval = 0;
+                $(el + ' ' + leftBtn).addClass("over");
+            }
+        }
+        else if (e == 1) {
+            var itemsCondition = $(el).find(itemsDiv).width() - $(el).width();
+            translateXval = parseInt(xds) + parseInt(itemWidth * s);
+            $(el + ' ' + leftBtn).removeClass("over");
+
+            if (translateXval >= itemsCondition - itemWidth / 2) {
+                translateXval = itemsCondition;
+                $(el + ' ' + rightBtn).addClass("over");
+            }
+        }
+        $(el + ' ' + itemsDiv).css('transform', 'translateX(' + -translateXval + 'px)');
+    }
+
+    //It is used to get some elements from btn
+    function click(ell, ee) {
+        var Parent = "#" + $(ee).parent().attr("id");
+        var slide = $(Parent).attr("data-slide");
+        ResCarousel(ell, Parent, slide);
+    }
+
+});
+</script>
+{% endblock %}

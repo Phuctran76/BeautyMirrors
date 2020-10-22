@@ -1,0 +1,9 @@
+body {
+    /* background-image: url('/static/images/brush.png'); */
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.card {
+    border: 0px solid rgba(0,0,0,.125)
+}   
